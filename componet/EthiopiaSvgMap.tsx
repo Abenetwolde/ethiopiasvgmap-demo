@@ -149,7 +149,7 @@ export function EthiopinaMapTest() {
     },
     afar: {
       value: 1,
-      color: '#FF33A1',
+      color: '#FFF3A1',
       label: 'Afar Region',
       universities: ['Samara University']
     },
@@ -167,6 +167,7 @@ export function EthiopinaMapTest() {
       ]
     }
   };
+
 
   return (
      <>
@@ -332,12 +333,8 @@ export function EthiopinaMapTest() {
         </button>
       </div>
 
-<div className="mb-2 p-1 bg-white rounded-md shadow-md flex flex-col gap-1">
-        <h2 className="text-base font-semibold">Region Data</h2>
-        <p className="text-xs text-gray-600">
-          Click on a region to see its universities and total count in the tooltip.
-        </p>
-        </div>
+
+ 
       {/* Map Component */}
       <EthiopiaSvgMap
         regionData={showRegionColors ? regionData : {}}

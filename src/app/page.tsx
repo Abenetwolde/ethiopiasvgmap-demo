@@ -2,8 +2,8 @@ import { EthiopinaMapTest } from "../../componet/EthiopiaSvgMap";
 
 export default function Home() {
   return (
-    <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm md:max-w-3xl bg-white rounded-lg shadow-lg p-6">
+    <div className=" flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl  rounded-lg shadow-lg p-6">
         <EthiopinaMapTest />
       </div>
     </div>
