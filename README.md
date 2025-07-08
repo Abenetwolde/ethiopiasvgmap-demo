@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ethiopian SVG Map Component
 
-## Getting Started
+A customizable **React component** for rendering an interactive SVG map of Ethiopian regions with hover, click, and zoom functionalities.
 
-First, run the development server:
+![Demo](./EthiopiaSvgMap.gif)
+
+[🌐 **Live Demo Website**](https://ethiopiasvgmap-demo.vercel.app/)
+[🔗 **ethiopia-svg-map**](https://www.npmjs.com/package/ethiopia-svg-map)
+---
+
+## 📦 Installation
 
 ```bash
-npm run dev
+npm install ethiopia-svg-map
 # or
-yarn dev
+yarn add ethiopia-svg-map
 # or
-pnpm dev
-# or
-bun dev
+pnpm install ethiopia-svg-map
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Basic Example
 
-## Learn More
+```jsx
+import { useState } from 'react';
+import { EthiopiaSvgMap } from 'ethiopia-svg-map';
 
-To learn more about Next.js, take a look at the following resources:
+const App = () => {
+  const [selectedRegion, setSelectedRegion] = useState(null);
+//sample datas
+  const regionData = {
+    tigray: {
+      value: 5,
+      label: 'Tigray',
+      universities: ['Mekelle University', 'Aksum University']
+      color:"#347433"
+    },
+    amhara: {
+      value: 7,
+      label: 'Amhara',
+      color: "FFC107"
+      universities: ['University of Gondar', 'Bahir Dar University']
+    }
+  //Add data for the other regions
+  };
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  return (
+    <EthiopiaSvgMap
+      regionData={regionData}
+      selectedRegion={selectedRegion}
+      setSelectedRegion={setSelectedRegion}
+      defaultFillColor="#67AE6E"
+      activeFillColor="#90C67C"
+      hoverFillColor="#90C67C"
+      strokeColor="#328E6E"
+      strokeWidth={0.7}
+      activeStrokeWidth={1}
+      hoverOpacity={0.9}
+      className="flex items-center justify-center w-full h-auto bg-gray-100"
+      showValues
+      showRegionLabels
+      tooltipContent={(regionId, data) => (
+        <Tooltip regionId={regionId} data={data} />
+      )}
+      enableZoom
+      zoomLevel={1}
+      showLegend
+    />
+  );
+};
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+// Sample Tooltip Component
+const Tooltip = ({ regionId, data }) => (
+);
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧩 Props
+
+| Prop                | Type                                                  | Default                                                         | Description                                                |
+|---------------------|-------------------------------------------------------|------------------------------------------------------------------|------------------------------------------------------------|
+| `selectedRegion`    | `string \| null`                                     | `null`                                                           | Currently selected region ID                              |
+| `setSelectedRegion` | `React.Dispatch<React.SetStateAction<string \| null>>`| —                                                                | Setter function for region selection                      |
+| `regionData`        | `Record<string, RegionData>`                                  | `{}`                                                             | Custom data for each region                               |
+| `defaultFillColor`  | `string`                                               | `#67AE6E`                                                        | Default region fill color                                 |
+| `activeFillColor`   | `string`                                               | `#90C67C`                                                        | Fill color for active region                              |
+| `hoverFillColor`    | `string`                                               | `#90C67C`                                                        | Fill color on region hover                                |
+| `strokeColor`       | `string`                                               | `#328E6E`                                                        | Region border color                                       |
+| `activeStrokeColor` | `string`                                               | `#FFFFFF`                                                        | Border color for active region                            |
+| `strokeWidth`       | `number`                                               | `0.7`                                                            | Default border width                                      |
+| `activeStrokeWidth` | `number`                                               | `1`                                                              | Border width for active region                            |
+| `hoverOpacity`      | `number`                                               | `0.9`                                                            | Opacity when hovering (0–1)                               |
+| `className`         | `string`                                               | `flex items-center justify-center w-full h-auto bg-gray-100`     | Container class                                            |
+| `svgClassName`      | `string`                                               | `w-full h-auto`                                                 | SVG element class name                                    |
+| `onRegionHover`     | `(regionId: string \| null) => void`                 | —                                                                | Callback when a region is hovered                         |
+| `onRegionClick`     | `(regionId: string) => void`                           | —                                                                | Callback when a region is clicked                         |
+| `tooltipContent`    | `(regionId: string, data?: any) => React.ReactNode`   | —                                                                | Renders custom tooltip content                            |
+| `width`             | `string \| number`                                   | `'100%'`                                                         | Width of the map                                          |
+| `height`            | `string \| number`                                   | `'auto'`                                                         | Height of the map                                         |
+| `viewBox`           | `string`                                               | `'0 0 441.853 328.295'`                                          | SVG viewBox                                               |
+| `enableZoom`        | `boolean`                                              | `false`                                                          | Enables zoom support                                      |
+| `zoomLevel`         | `number`                                               | `1`                                                              | Initial zoom level                                        |
+| `customStyles`      | `string`                                               | `''`                                                             | Custom CSS for SVG                                        |
+| `showRegionLabels`  | `boolean`                                              | `false`                                                          | Whether to show region labels                             |
+| `labelClassName`    | `string`                                               | `text-xs font-medium`                                            | CSS class for labels                                      |
+| `labelPosition`     | `string`                                               | `'center'`                                                       | Label position (`'center'`, `'top'`, etc.)                |
+| `showValues`        | `boolean`                                              | `false`                                                          | Whether to show numeric values for regions                |
+| `valueFormatter`    | `(val: any) => string`                                 | `(val) => val.toString()`                                        | Function to format value                                  |
+| `defaultLabelStyle` | `React.CSSProperties`                                  | `{}`                                                             | Inline style for region labels                            |
+| `defaultValueStyle` | `React.CSSProperties`                                  | `{}`                                                             | Inline style for region values                            |
+| `showLegend`        | `boolean`                                              | `true`                                                           | Whether to show legend                                    |
+
+---
+
+## 🎨 Styling
+
+This component uses [Tailwind CSS](https://tailwindcss.com/).
+
+Make sure to include it in your project (if not already):
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+```
+
+---
+
+## 📄 License
+
+**MIT**

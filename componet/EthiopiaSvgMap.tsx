@@ -171,17 +171,17 @@ export function EthiopinaMapTest() {
 
   return (
      <>
-    <div className="relative w-full text-center bg-gray-100 p-4">
+    <div className="relative w-full text-center text-black bg-gray-100 p-4">
       {/* Page Title and Description */}
-      <h1 className="text-2xl font-bold mb-1">Ethiopian SVG Map Component</h1>
+      <h1 className="text-2xl text-gray-900 font-bold mb-1">Ethiopian SVG Map Component</h1>
       <p className="text-gray-600 text-sm mb-1">
         A customizable React component for rendering an interactive SVG map of Ethiopian regions with hover, click, and zoom functionalities. Install via <code>npm install ethiopia-svg-map</code>.
       </p>
 
       {/* Controls Panel */}
       <div className="mb-2 p-1 bg-white rounded-md shadow-md flex flex-col gap-1">
-        <h2 className="text-base font-semibold">Map Controls</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+        <h2 className="text-base font-semibold text-gray-600 ">Map Controls</h2>
+        <div className="grid text-black grid-cols-2 md:grid-cols-4 gap-1">
           {/* Color Pickers */}
           <div>
             <label className="block text-xs font-medium">Default Fill</label>
@@ -374,7 +374,7 @@ export function EthiopinaMapTest() {
       <strong className="text-sm text-center">Selected Region:</strong> {selectedRegion || 'None'}
 
     </div>
-   <footer className="w-full mt-10  text-black  py-4 text-center text-sm">
+   <footer className="w-full mt-10 bg-white  text-black  py-4 text-center text-sm">
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="flex items-center gap-4">
           <span className='font-semibold'>Download and try <code>ethiopia-svg-map</code>:</span>
